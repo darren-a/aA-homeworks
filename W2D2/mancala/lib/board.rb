@@ -18,27 +18,26 @@ class Board
     (7..12).each { |i|  @cups[i] = four_stone_arr.dup }
   end
 
+
   def valid_move?(start_pos)
     raise 'Invalid starting cup' if start_pos < 0 || start_pos > 13
     raise 'Starting cup is empty' if @cups[start_pos].length == 0
   end
 
+
   def make_move(start_pos, current_player_name)
-    i = 0
-    #byebug
+    i = start_pos
     num_stones = @cups[start_pos].length
     while @cups[start_pos].length > 0
       i += 1
-      i == i % 14
+      i = i % 14
       next if ( (i == 13) && current_player_name == @player1)
-      next if ( (i == 5) && current_player_name == @player2)
+      next if ( (i == 6) && current_player_name == @player2)
       @cups[i] << @cups[start_pos].pop
       @end_idx = i
     end
-    @end_idx = (start_pos + num_stones) % 14
-    next_turn(@end_idx)
-    p @end_idx
     render
+    next_turn(@end_idx)
   end
 
 
@@ -46,12 +45,12 @@ class Board
     # helper method to determine whether #make_move returns :switch, :prompt, or ending_cup_idx
     num_stones =  @cups[ending_cup_idx].length
 
-    if ending_cup_idx == 5 || ending_cup_idx == 13
-      return ending_cup_idx
+    if ending_cup_idx == 6 || ending_cup_idx == 13
+      return :prompt
     elsif num_stones == 1
       return :switch
-    elsif num_stones > 1
-      return :prompt
+    else
+      return ending_cup_idx
     end
   end
 
