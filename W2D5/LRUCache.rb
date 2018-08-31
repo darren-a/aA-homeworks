@@ -17,17 +17,18 @@ class LRUCache
     def add(el)
       # adds element to cache according to LRU principle
       # if el already in there bring it to the front
-      already_in_idx = @cache.index(el)
-      @cache.delete_at(already_in_idx) if already_in_idx
+      @cache.delete(el) if @cache.include?(el)
 
       # if new item remove the least recently used if count > limit elements
       @cache.shift if self.count >= @limit
+
       @cache.push(el)
     end
 
     def show
       # shows the items in the cache, with the LRU item first
       print @cache
+      nil
     end
 
     private
