@@ -111,7 +111,7 @@ class MetaCorgiSnacks
 
   def method_missing(name, *args)
     # name => bone / kibble /treat
-    # args => box_id
+    
     info_method = "get_#{name.to_s}_info"
     tasty_method = "get_#{name.to_s}_tastiness"
 
