@@ -10,4 +10,11 @@
   <body>
     <%= yield %>
   </body>
+
+  <p>Welcome to the cats' mailer page</p>
+
+  <% content_for :footer do %>
+    <p>This is the cats mailer page.</p>
+  <% end %>
+
 </html>
